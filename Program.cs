@@ -20,5 +20,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapGet("/", () => "Hello World!");
+app.MapGet("/test", () => new {
+    success = true,
+    message = "This is a test messge",
+    });
 
 app.Run();

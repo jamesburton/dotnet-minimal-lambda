@@ -34,3 +34,22 @@ builder.Services.AddSwaggerGen();
 // If the application is not running in Lambda then this method will do nothing. 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 ```
+* Add ports and tasks for certs, restore, build and watch-run task to .gitpod.yml
+```
+tasks:
+  - name: Create dev certificate for HTTPS
+    init: dotnet dev-certs https # NB: Could add `gp sync-done create-cert`
+  - name: Build and watch-run aspnet application/API
+    init: | # Could add `gp sync-await create-cert`
+      dotnet restore
+      dotnet build
+    command: dotnet watch run
+
+ports:
+  - port: 5113 # HTTP
+    onOpen: open-browser
+```
+* When you restart now the app should build and watch-run then open the browser.
+* Swagger is available on `/swagger`, and the JSON is at `/swagger/v1/swagger.json`
+* Now you can simply update functions in the `Program.cs` file.
+    * NB: Detection runs at startup so if you add a new function you will need to stop the watch-run and restart with `dotnet watch run`

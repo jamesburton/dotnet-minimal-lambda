@@ -21,7 +21,8 @@ RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git na
 # Moved to .gitpod.yml
 ## Install lambda tools
 # RUN mkdir -p /home/gitpod/.dotnet/tools && dotnet tool install Amazon.Lambda.Tools --tool-path /home/gitpod/.dotnet/tools
-RUN mkdir -p /opt/gitpod/.dotnet/tools && chmod +r /opt/gitpod && chmod +r /opt/gitpod/.dotnet && chmod +rx /opt/gitpod/.dotnet/tools && dotnet tool install Amazon.Lambda.Tools --tool-path /opt/gitpod/.dotnet/tools
+RUN mkdir -p /opt/gitpod/.dotnet/tools && chmod +r /opt/gitpod && chmod +r /opt/gitpod/.dotnet && dotnet tool install Amazon.Lambda.Tools --tool-path /opt/gitpod/.dotnet/tools
 ##RUN dotnet tool install -g Amazon.ECS.Tools
 ##RUN dotnet tool install -g Amazon.ElasticBeanstalk.Tools
 ENV PATH=${PATH}:/home/gitpod/.dotnet/tools
+RUN chmod -R +rx /opt/gitpod/.dotnet/tools

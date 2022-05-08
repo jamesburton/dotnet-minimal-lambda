@@ -51,10 +51,10 @@ image:
 #  - init: echo 'init script' # runs during prebuild
 #/    command: echo 'start script'
 
-tasks:
-  - name: Install Amazon.Lambda.Tools
-    init: dotnet tool install -g Amazon.Lambda.Tools
-    command: dotnet tool update -g Amazon.Lambda.Tools
+#tasks:
+#  - name: Install Amazon.Lambda.Tools
+#    init: dotnet tool install -g Amazon.Lambda.Tools
+#    command: dotnet tool update -g Amazon.Lambda.Tools
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:

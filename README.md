@@ -23,4 +23,3 @@ app.UseSwaggerUI();
 ```
 * Install libraries for AWS Lambda wrapper
     * `dotnet add package Amazon.Lambda.AspNetCoreServer` 
-* Modify `Program.cs` to add

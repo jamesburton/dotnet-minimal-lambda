@@ -21,5 +21,20 @@
 app.UseSwagger();
 app.UseSwaggerUI();
 ```
+* Add Swagger build config in `Program.cs` (before .Build()):
+```
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+```
 * Install libraries for AWS Lambda wrapper
     * `dotnet add package Amazon.Lambda.AspNetCoreServer` 
+* ??? Modify `Program.cs` to add Lambda wrapper to builder:
+```
+// Register Lambda to replace Kestrel as the web server for the ASP.NET Core application.
+// If the application is not running in Lambda then this method will do nothing. 
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+```
+    * NB: Haven't found this method, and you appear to need to add this class
+        * This should descend from `Amazon.Lambda.AspNetCoreServer.APIGatewayHttpApiV2ProxyFunction`
+        * If a Startup file is used, it should be added with an override to Init
+    

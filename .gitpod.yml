@@ -64,4 +64,6 @@ ports:
 vscode:
   extensions:
     - muhammad-sammy.csharp
+    - AmazonWebServices.aws-toolkit-vscode
     - GitHub.copilot
+    

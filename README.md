@@ -16,3 +16,11 @@
 * `dotnet new web -o . -n dotnet-minimal-lambda`
 * Install libraries for Swagger
     * `dotnet add package Swashbuckle.AspNetCore`
+* Add Swagger including UI in `Program.cs` after initial .Build()
+```
+app.UseSwagger();
+app.UseSwaggerUI();
+```
+* Install libraries for AWS Lambda wrapper
+    * `dotnet add package Amazon.Lambda.AspNetCoreServer` 
+* Modify `Program.cs` to add

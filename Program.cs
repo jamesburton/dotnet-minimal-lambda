@@ -12,11 +12,7 @@ builder.Services.AddSwaggerGen();
 
 // Register Lambda to replace Kestrel as the web server for the ASP.NET Core application.
 // If the application is not running in Lambda then this method will do nothing. 
-//builder.Services.AddAWSLambdaHosting(LambdaEntryPoint.HttpApi);
-//builder.Services.AddAWSLambdaHosting(???);
-var entryPoint = new LambdaEntryPoint();
-builder.Services.AddSingleton(entryPoint);
-// entryPoint.Init(builder); // NB: This is not public
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 var app = builder.Build();
 

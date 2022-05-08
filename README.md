@@ -14,3 +14,5 @@
 ## Create
 
 * `dotnet new web -o . -n dotnet-minimal-lambda`
+* Install libraries for Swagger
+    * `dotnet add package Swashbuckle.AspNetCore`

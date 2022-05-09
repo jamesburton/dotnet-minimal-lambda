@@ -54,3 +54,17 @@ ports:
 * Now you can simply update functions in the `Program.cs` file.
     * NB: Detection runs at startup so if you add a new function you will need to stop the watch-run and restart with `dotnet watch run`
 * NB: At the time of writing the latest tooling is dotnet7 but dotnet6 is the latest on lambda, so change this in the .csproj if you get a framework load error when deployed.
+* For a single stage, Bootstrap a deployment pipeline `sam pipeline bootstrap`
+  * Enter stage name e.g. `prod`
+  * Select AWS credentials source e.g. 2 - default (named profile)
+  * Select pipline IAM and build resources if previously created (or enter nothing to create)
+  * Defaults are generally fine for the remaining options, but review to requirement
+  * Check summary and confirm, then confirm creation of resources
+  * Then init pipeline `sam pipeline init`
+* Otherwise, apply both together for guide multi-stage:
+  * `sam pipeline init --bootstrap`
+  * Note the generated pipeline user access key and secret
+  * Add these to github as variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    NB: Go to repo -> Settings -> Secrets
+  * Confirm the variable names in pipeline config
+  

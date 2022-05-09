@@ -53,3 +53,4 @@ ports:
 * Swagger is available on `/swagger`, and the JSON is at `/swagger/v1/swagger.json`
 * Now you can simply update functions in the `Program.cs` file.
     * NB: Detection runs at startup so if you add a new function you will need to stop the watch-run and restart with `dotnet watch run`
+* NB: At the time of writing the latest tooling is dotnet7 but dotnet6 is the latest on lambda, so change this in the .csproj if you get a framework load error when deployed.

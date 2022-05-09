@@ -1,67 +1,35 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
-  "Description": "An AWS Serverless Application.",
+  "Description": "An Minimal AWS Serverless Application.",
   "Resources": {
     "AspNetCoreFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
-        "Handler": "dotnet_minimal_lambda::dotnet_minimal_lambda.LambdaEntryPoint::FunctionHandlerAsync",
-        "Runtime": "dotnet6.0",
-        "CodeUri": "",
+        "Handler": "dotnet-minimal-lambda",
+        "Runtime": "dotnet6",
         "MemorySize": 256,
-        "Timeout": 30,
+        "Timeout": 35,
         "Role": null,
         "Policies": [
-          "AWSLambdaFullAccess", "AmazonSSMFullAccess","AWSLambdaVPCAccessExecutionRole"
+          "AWSLambda_FullAccess",
+          "AmazonS3ReadOnlyAccess"
         ],
-        "Environment": {
-          "Variables": {
-            "AppS3Bucket": {
-              "Fn::If": [
-                "CreateS3Bucket",
-                {
-                  "Ref": "Bucket"
-                },
-                {
-                  "Ref": "BucketName"
-                }
-              ]
-            }
-          }
-        },
         "Events": {
           "ProxyResource": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/{proxy+}",
               "Method": "ANY"
             }
           },
           "RootResource": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/",
               "Method": "ANY"
             }
           }
-        }
-      }
-    },
-    "Bucket": {
-      "Type": "AWS::S3::Bucket",
-      "Condition": "CreateS3Bucket",
-      "Properties": {
-        "BucketName": {
-          "Fn::If": [
-            "BucketNameGenerated",
-            {
-              "Ref": "AWS::NoValue"
-            },
-            {
-              "Ref": "BucketName"
-            }
-          ]
         }
       }
     }

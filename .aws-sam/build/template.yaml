@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An Minimal AWS Serverless Application.
+Resources:
+  AspNetCoreFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dotnet-minimal-lambda
+      Runtime: dotnet6
+      MemorySize: 256
+      Timeout: 35
+      Role: null
+      Policies:
+      - AWSLambda_FullAccess
+      - AmazonS3ReadOnlyAccess
+      Events:
+        ProxyResource:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        RootResource:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: ANY
+      CodeUri: AspNetCoreFunction
+    Metadata:
+      SamResourceId: AspNetCoreFunction
+Outputs:
+  ApiURL:
+    Description: API endpoint URL for Prod environment
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/

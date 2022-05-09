@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "dotnet-minimal-lambda"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1hferqb5euttd"
+s3_prefix = "dotnet-minimal-lambda"
+region = "eu-west-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []

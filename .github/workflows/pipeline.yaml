@@ -12,7 +12,7 @@ on:
 env:
   PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  SAM_TEMPLATE: template.yaml
+  SAM_TEMPLATE: template.yml
   TESTING_STACK_NAME: dotnet-minimal-lambda
   TESTING_PIPELINE_EXECUTION_ROLE: arn:aws:iam::194175976246:role/aws-sam-cli-managed-prod-pip-PipelineExecutionRole-14EHGTCEFZHO6
   TESTING_CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::194175976246:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-1WGJ59GSJ8EB8

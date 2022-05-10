@@ -2,7 +2,8 @@
 #FROM mcr.microsoft.com/dotnet/nightly/sdk
 #FROM mcr.microsoft.com/dotnet/sdk:6.0
 #FROM bitnami/dotnet-sdk:latest
-FROM bitnami/dotnet-sdk:6
+#FROM bitnami/dotnet-sdk:6
+FROM codeconsultants/dotnet-sdk
 
 # Install Node (and NPM)
 RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano less \
@@ -19,7 +20,8 @@ RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git na
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
-    && aws --version
+    && aws --version \
+    && dotnet --version
 
 # Moved to .gitpod.yml
 ## Install lambda tools

@@ -1,8 +1,9 @@
 # image: gitpod/workspace-dotnet:latest
-image:
-  file: .gitpod.Dockerfile
+#image:
+#  file: .gitpod.Dockerfile
 #image: gitpod/workspace-full:latest
 #image: mcr.microsoft.com/dotnet/nightly/sdk
+image: codeconsultants/dotnet-sdk:6.0
 
 tasks:
   - name: Create dev certificate for HTTPS

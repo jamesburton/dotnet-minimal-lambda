@@ -67,4 +67,4 @@ ports:
   * Add these to github as variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
     NB: Go to repo -> Settings -> Secrets
   * Confirm the variable names in pipeline config
-  
+* Need to tidy up smooth path, but to resolve deployment failures (listed in GitHub actions) I followed through creating a Role with Sts:AssumeRole for the relevant deployment + Modifying the role to allow the GitHub pipeline IAM user permissions to assume the role.

@@ -1,11 +1,16 @@
 #FROM gitpod/workspace-full:latest
-#FROM gitpod/workspace-basic:latest
-FROM gitpod/workspace-dotnet
+FROM gitpod/workspace-base:latest
+#FROM gitpod/workspace-dotnet
 #FROM mcr.microsoft.com/dotnet/nightly/sdk
 #FROM mcr.microsoft.com/dotnet/sdk:6.0
 #FROM bitnami/dotnet-sdk:latest
 #FROM bitnami/dotnet-sdk:6
 #FROM codeconsultants/dotnet-sdk
+
+USER gitpod
+
+# Get linux version from base image
+RUN lsb_release -d
 
 # Add Microsoft package source and key(s)
 #RUN wget https://packages.microsoft.com/#config/ubuntu/21.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
@@ -16,6 +21,15 @@ FROM gitpod/workspace-dotnet
 # && apt-get install -y apt-transport-https \
 # && apt-get update \
 # && apt-get install -y dotnet-sdk-6.0
+#RUN wget https://packages.microsoft.com/#config/ubuntu/21.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+ && sudo dpkg -i packages-microsoft-prod.deb \
+ && rm packages-microsoft-prod.deb
+# Install .NET SDK 6.0
+RUN sudo apt-get update \
+ && sudo apt-get install -y apt-transport-https \
+ && sudo apt-get update \
+ && sudo apt-get install -y dotnet-sdk-6.0
 
 # Install Node (and NPM)
 #RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano less \#
@@ -67,5 +81,4 @@ ENV PATH=${PATH}:/opt/dotnet/tools
 ## && chmod -R 777 /home/gitpod/.dotnet/omnisharp \
 ## && chmod -R 777 /home/gitpod/.dotnet/6.0.300.toolpath.sentinel
 
-#USER gitpod
 #RUN dotnet tool install --global Amazon.Lambda.Tools

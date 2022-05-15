@@ -83,4 +83,6 @@ ENV PATH=${PATH}:/opt/dotnet/tools
 
 #RUN dotnet tool install --global Amazon.Lambda.Tools
 # Attempt at fixing dotnet build permission error
-RUN chmod -R +rx /usr/share/dotnet/sdk
+RUN sudo chmod -R +rx /usr/share/dotnet/sdk
+#RUN chmod +rx /usr/share/dotnet/sdk
+#RUN chmod +rx /usr/share/dotnet/sdk/6.0.*

@@ -35,4 +35,8 @@ FROM codeconsultants/dotnet-sdk
 # Configure path for gitpod
 RUN mkdir -p /home/gitpod/.dotnet/tools \
  && chmod -R +r /home/gitpod/.dotnet/ \
- && chmod -R +rx /home/gitpod/.dotnet/tools
+ && chmod -R +rx /home/gitpod/.dotnet/tools \
+ && mkdir -p /home/gitpod/.dotnet/6.0.300.toolpath.sentinel \
+ && mkdir -p /home/gitpod/.dotnet/omnisharp \
+ && chmod -R 777 /home/gitpod/.dotnet/omnisharp \
+ && chmod -R 777 /home/gitpod/.dotnet/6.0.300.toolpath.sentinel

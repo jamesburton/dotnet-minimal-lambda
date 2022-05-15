@@ -32,3 +32,7 @@ FROM codeconsultants/dotnet-sdk
 ##RUN dotnet tool install -g Amazon.ElasticBeanstalk.Tools --tool-path /opt/dotnet/tools
 #RUN chmod -R +rx /opt/dotnet/tools
 #ENV PATH=${PATH}:/opt/dotnet/tools
+# Configure path for gitpod
+RUN mkdir -p /home/gitpod/.dotnet/tools \
+ && chmod +r /home/gitpod/.dotnet/ \
+ && chmod -R +rx /home/gitpod/.dotnet/tools

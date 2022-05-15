@@ -27,6 +27,8 @@ app.MapGet("/test", () => new {
     message = "This is a test messge",
     });
 app.MapGet("/service", async (IService service) => await service.Run());
+// app.MapGet("/timer", () => new { success = true, whenUtc = System.DateTime.UtcNow });
+app.Map("/s3", () => System.Environment.GetEnvironmentVariable("S3_TEST"));
 
 app.Run();
 

@@ -30,8 +30,18 @@
               "Method": "ANY"
             }
           }
+        },
+        "Environment": {
+          "Variables": {
+            "S3_TEST": {
+              "Ref": "S3TestBucket"
+            }
+          }
         }
       }
+    },
+    "S3TestBucket": {
+      Type: "AWS::S3::Bucket"
     }
   },
   "Outputs": {
@@ -39,6 +49,12 @@
       "Description": "API endpoint URL for Prod environment",
       "Value": {
         "Fn::Sub": "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/"
+      }
+    },
+    "S3Tests": {
+      "Description": "S3 ARN",
+      "Value": {
+        "ARN": "${S3TestBucket::ARN}"
       }
     }
   }

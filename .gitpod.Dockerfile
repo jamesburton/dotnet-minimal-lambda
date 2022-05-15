@@ -1,9 +1,9 @@
 #FROM gitpod/workspace-full:latest
 #FROM mcr.microsoft.com/dotnet/nightly/sdk
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+#FROM mcr.microsoft.com/dotnet/sdk:6.0
 #FROM bitnami/dotnet-sdk:latest
 #FROM bitnami/dotnet-sdk:6
-#FROM codeconsultants/dotnet-sdk
+FROM codeconsultants/dotnet-sdk
 
 # Install Node (and NPM)
 RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano less \

@@ -29,7 +29,7 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
 RUN sudo apt-get update \
  && sudo apt-get install -y apt-transport-https \
  && sudo apt-get update \
- && sudo apt-get install -y dotnet-sdk-6.0
+ && sudo apt-get install -y dotnet-sdk-6.0 nuget
 
 # Install Node (and NPM)
 #RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano less \#

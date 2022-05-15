@@ -21,8 +21,9 @@ RUN lsb_release -d
 # && apt-get install -y apt-transport-https \
 # && apt-get update \
 # && apt-get install -y dotnet-sdk-6.0
-#RUN wget https://packages.microsoft.com/#config/ubuntu/21.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+#RUN wget https://packages.microsoft.com/config/ubuntu/21.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+#RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
  && sudo dpkg -i packages-microsoft-prod.deb \
  && rm packages-microsoft-prod.deb
 # Install .NET SDK 6.0
@@ -83,6 +84,7 @@ ENV PATH=${PATH}:/opt/dotnet/tools
 
 #RUN dotnet tool install --global Amazon.Lambda.Tools
 # Attempt at fixing dotnet build permission error
-RUN sudo chmod -R +rx /usr/share/dotnet/sdk
+RUN sudo chmod -R +rx /usr/share/dotnet
+#RUN sudo chmod -R +rx /usr/share/dotnet/sdk
 #RUN chmod +rx /usr/share/dotnet/sdk
 #RUN chmod +rx /usr/share/dotnet/sdk/6.0.*

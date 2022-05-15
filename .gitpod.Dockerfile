@@ -9,8 +9,13 @@ FROM gitpod/workspace-base:latest
 
 USER gitpod
 
-# Get linux version from base image
-RUN lsb_release -d
+## Get linux version from base image
+#RUN lsb_release -d
+
+# Fix from https://github.com/gitpod-io/template-dotnet-core-cli-csharp/commit/9d01b88fa900c7802103a13ca0cc18b2b02c4752
+#.NET installed via .gitpod.yml task until the following issue is fixed: https://github.com/gitpod-io/gitpod/issues/5090
+ENV DOTNET_ROOT=/tmp/dotnet
+ENV PATH=$PATH:/tmp/dotnet 
 
 # Add Microsoft package source and key(s)
 #RUN wget https://packages.microsoft.com/#config/ubuntu/21.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \

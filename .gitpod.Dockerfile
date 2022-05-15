@@ -34,5 +34,5 @@ FROM codeconsultants/dotnet-sdk
 #ENV PATH=${PATH}:/opt/dotnet/tools
 # Configure path for gitpod
 RUN mkdir -p /home/gitpod/.dotnet/tools \
- && chmod +r /home/gitpod/.dotnet/ \
+ && chmod -R +r /home/gitpod/.dotnet/ \
  && chmod -R +rx /home/gitpod/.dotnet/tools

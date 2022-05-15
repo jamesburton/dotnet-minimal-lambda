@@ -82,3 +82,5 @@ ENV PATH=${PATH}:/opt/dotnet/tools
 ## && chmod -R 777 /home/gitpod/.dotnet/6.0.300.toolpath.sentinel
 
 #RUN dotnet tool install --global Amazon.Lambda.Tools
+# Attempt at fixing dotnet build permission error
+RUN chmod -R +rx /usr/share/dotnet/sdk

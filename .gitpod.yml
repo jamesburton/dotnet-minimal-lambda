@@ -8,13 +8,13 @@ image:
 tasks:
   # Fix from https://github.com/gitpod-io/template-dotnet-core-cli-csharp/commit/9d01b88fa900c7802103a13ca0cc18b2b02c4752
   # Mitigation for https://github.com/gitpod-io/gitpod/issues/6460 
-  - name: Postinstall .NET 6.0 and dev certificates
-    init: |
-      mkdir -p /tmp/dotnet && curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 6.0 --install-dir /tmp/dotnet 
-      dotnet dev-certs https 
-      dotnet restore
-  #- name: Create dev certificate for HTTPS
-  #  init: dotnet dev-certs https # NB: Could add `gp sync-done create-cert`
+  #- name: Postinstall .NET 6.0 and dev certificates
+  #  init: |
+  #    mkdir -p /tmp/dotnet && curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 6.0 --install-dir /tmp/dotnet 
+  #    dotnet dev-certs https 
+  #    dotnet restore
+  - name: Create dev certificate for HTTPS
+    init: dotnet dev-certs https # NB: Could add `gp sync-done create-cert`
   - name: Build and watch-run aspnet application/API
     init: | # Could add `gp sync-await create-cert`
       dotnet restore

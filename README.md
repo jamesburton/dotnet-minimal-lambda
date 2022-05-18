@@ -102,7 +102,21 @@ ports:
   }
 }
 ```
-* Use SAM guided moded to configure for deployment with `sam deploy --guided`
+* If required for your environment, add a `Tags` map, in the function's `Properties` section such as 
+```
+      "Properties": {
+        // ...
+        "Tags": {
+          "Name": "APM Badges",
+          "Environment": "prod",
+          "OwnerName": "Central Infrastructure",
+          "OwnerEmail": "central-db@trilogy.com",
+        },
+        // ...
+   },
+```
+* Generate the CloudFormation template with `sam build`
+* Use SAM guided mode to configure for deployment with `sam deploy --guided`
 * For a single stage, Bootstrap a deployment pipeline `sam pipeline bootstrap`
   * Enter stage name e.g. `prod`
   * Select AWS credentials source e.g. 2 - default (named profile)

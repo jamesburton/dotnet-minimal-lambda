@@ -54,6 +54,69 @@ ports:
 * Now you can simply update functions in the `Program.cs` file.
     * NB: Detection runs at startup so if you add a new function you will need to stop the watch-run and restart with `dotnet watch run`
 * NB: At the time of writing the latest tooling is dotnet7 but dotnet6 is the latest on lambda, so change this in the .csproj if you get a framework load error when deployed.
+* Add a serverless template with a handler using Path `/{proxy+}`, ensure you match the Handler name, and add any addition permissions and/or resources e.g.
+```
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "An Minimal AWS Serverless Application.",
+  "Resources": {
+    "AspNetCoreFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "dotnet-minimal-lambda",
+        "Runtime": "dotnet6",
+        "MemorySize": 256,
+        "Timeout": 35,
+        "Role": null,
+        "Policies": [
+          "AWSLambda_FullAccess",
+          "AmazonS3ReadOnlyAccess"
+        ],
+        "Events": {
+          "ProxyResource": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/{proxy+}",
+              "Method": "ANY"
+            }
+          },
+          "RootResource": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/",
+              "Method": "ANY"
+            }
+          }
+        },
+      }
+    }
+  },
+  "Outputs": {
+    "ApiURL": {
+      "Description": "API endpoint URL for Prod environment",
+      "Value": {
+        "Fn::Sub": "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/"
+      }
+    }
+  }
+}
+```
+* If required for your environment, add a `Tags` map, in the function's `Properties` section such as 
+```
+      "Properties": {
+        // ...
+        "Tags": {
+          "Name": "APM Badges",
+          "Environment": "prod",
+          "OwnerName": "Central Infrastructure",
+          "OwnerEmail": "central-db@trilogy.com",
+        },
+        // ...
+   },
+```
+* Generate the CloudFormation template with `sam build`
+* Use SAM guided mode to configure for deployment with `sam deploy --guided`
 * For a single stage, Bootstrap a deployment pipeline `sam pipeline bootstrap`
   * Enter stage name e.g. `prod`
   * Select AWS credentials source e.g. 2 - default (named profile)
@@ -68,3 +131,7 @@ ports:
     NB: Go to repo -> Settings -> Secrets
   * Confirm the variable names in pipeline config
 * Need to tidy up smooth path, but to resolve deployment failures (listed in GitHub actions) I followed through creating a Role with Sts:AssumeRole for the relevant deployment + Modifying the role to allow the GitHub pipeline IAM user permissions to assume the role.
+
+### TODO
+
+* Add Blue/Green deployment configuration and basic health monitor alarm to check correct operation
